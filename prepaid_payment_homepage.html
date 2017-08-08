@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+	<meta name="WT.cid" content="客户端ID">
+	<meta name="WT.mobile" content="">
+	<meta name="WT.event" content="HFCZ_CZ">
+	<meta name="WT.event" content="HFCZ_JF">
+	<meta name="WT.event" content="HFCZ_CXQF">
+	<meta name="WT.event" content="HFCZ_HQDXYZM">
+	<meta name="WT.event" content="HFCZ_FWDHB">
+	<meta name="WT.event" content="HFCZ_GBLBWZ">
+	
+	<title>点击充值交费</title>
+	<link rel="stylesheet" type="text/css" href="./css/m_chongzhi.css">
+
+	<!--充值金额选项模板-->
+	<script type="text/x-template" id="money-template">
+		<ul class="cz-chargenum money clearfix">
+			<li v-for="(item,idx) in moneys">	
+				<a href="javascript:;" class="money-lbl-box" :id="item.id" @click="activeMoney(item.id)" 
+					:class="chosedMoney==item.id?'active':'' ">
+				{{item.val}}
+				</a>
+			</li>
+		</ul>						
+	</script>
+</head>
+<body >
+<div id="contain">
+<form action="/baiduWapPayAction" method="post">
+		<input type="hidden" name="loginnumber" :value="loginMsisdn" />
+		<input type="hidden" name="payPhone" v-model="payPhone" />
+		<input type="hidden" name="brandId" :value="brandId" />
+		<input type="hidden" name="brandflag" :value="brandflag" />
+		<input type="hidden" name="nextMethod" v-model="nextMethod" />
+		<input type="hidden" name="sort" :value="sort"/>
+		<input type="hidden" name="key" :value="key" />
+		<input type="hidden" name="commonPay" :value="commonPay" />
+		<input type="hidden" name="billMoney" />
+		<input type="hidden" name="pay_type" :value="pay_type" />
+		<input type="hidden" name="version" :value="version"/>
+		<input type="hidden" name="random" :value="random"/>
+		<input type="hidden" name="scode" :value="scode"/>
+		<input type="hidden" name="transactionid" :value="transactionid"/>
+		<input type="hidden" name="useSos" :value="useSos"/>	
+	<!-- 轮播图片 -->
+	<header class="scroll-img" id="canvas"></header>
+	<div class="contain-wrap" >
+		<div class="nav-div">
+			<h1 class="fs-h3">定额充值</h1>
+		</div>
+		<div class="content">
+			<div class="tab-radio-div">
+				<span class="radio-wrap" :class="radioChk==1?'radio-wrap-checked':'' ">
+					<input type="radio" name="phone-tab" class="radio-ipt" value="1" v-model="radioChk" />
+				</span>
+				<label for="cur_phone" class="radio-lbl">为当前登录号码充值</label>
+				<span class="radio-wrap" :class="radioChk==2?'radio-wrap-checked':'' ">
+					<input type="radio" name="phone-tab" class="radio-ipt" value="2" v-model="radioChk" />
+				</span>
+				<label for="other_phone" class="radio-lbl">为其他移动号码充值</label>
+			</div>
+			<div id="phone_ipt" class="phone-ipt-wrap">
+				<input id="mobilephone" type="text"
+				    :readonly="radioChk==1?true:false "
+					maxlength="11" @blur="autheMsisdn()" placeholder="请输入北京移动号码" Number
+					@keyup="autheMsisdn()" v-model="inputPhone"/>
+				<span id="book_icon" class="phone-book-icon vistiable"></span>
+			</div>
+			<div style="margin-top:0px;" :class="phoneNotValid==true?'phone-tip-wrong':'phone-tip-right' ">
+				{{phoneNotValid==true?'请输入正确的手机号':'北京移动'}}
+			</div>
+			<!-- 校验手机号码提示 -->
+
+			<div class="cz-jine-tip">
+				<h4 class="fs-sma">选择充值金额</h4>
+			</div>
+			<money :moneys="moneyList" :chosed-money="chosedMoney" @chosed="choseMoney"></money>
+
+			<div class="cz-jine-tip">
+				<h4 class="fs-sma">其他金额</h4>
+				<input type="text" class="ipt-money"
+					placeholder="请输入10~3000元整数" 
+					onkeyup="value=this.value.replace(/\D+/g,'')" v-model="otherAmount"
+					@blur="verificationOtherAmount()" @focus="clearAmount" />
+			</div>
+			<!-- 优惠详情 -->
+			<div class="youhui_wrap" v-show="radioChk==1">
+				<h4 class="fs-sma">充值优惠</h4>
+				<ul class="youhui-ul">
+					<li class="youhui-li">
+						<p class="youhui-li-title"></p>
+						<p class="youhui-li-body">
+							<span>首次和包充值<i>享9.5折，最高减5元</i></span>
+							<em></em>
+						</p>
+					</li>
+					<li class="youhui-li">
+						<p class="youhui-li-body add">
+							<span>其他方式充值9.98折</span>
+						</p>
+					</li>
+					<li class="youhui-li">
+						<p class="youhui-li-body add">
+							<span>优惠金额进入副卡2账户</span>
+						</p>
+					</li>
+				</ul>
+			</div>
+			<!-- 增加温馨提示 -->
+			<div class="foot-wrap">
+				<a href="javascript:;" class="submit-btnb" @click="btnSubmit()" :class="{'huise':btnGray}">和包充值</a><!--
+				--><a href="javascript:;" class="submit-btnb" @click="btnSubmit()" :class="{'huise':btnGray}">其他充值</a>
+				<div class="words-con">
+					<h3 class="words-tip">温馨提示:</h3>
+					<p>
+					1.仅限为北京移动全球通(不含随e行)、动感地带、神州行升级版标准卡、家园卡（大众卡）、畅听卡、无线座机卡、5元卡进行充值服务。充值前请仔细核对充值号码和充值金额，一旦充值成功则无法退款。<br/>
+					2.您可在充值次月话费出账后前往北京移动营业厅打印月结发票。<br/>
+					3.充值99.5折优惠参与条件：仅限为登录北京移动手机营业厅的号码充值方可享受，举例：A号码登陆客户端，为A号码进行充值可享受99.5折优惠，为A以外的号码充值则不享受99.5折优惠。<br/>
+					4.充值99.5折优惠形式：客户实付金额为所选充值金额的99.5%，到账100%，其中99.5%进入主账户，0.05%进入副2账户。举例：如您选择充值金额为100元，则实际需支付99.5元，到账100元，其中99.5元进入主账户，0.5元进入副2账户。<br/>
+					5.副2账户可正常充抵您的套餐费等通信费用，不可用于支付“通信账户支付业务”、“话费支付业务”消费，不可退费和转出，您可通过10086查询副2账户余额。<br/>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+</body>
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript" src="./js/chongzhi.js"></script>
+
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+	<meta name="WT.cid" content="客户端ID">
+	<meta name="WT.mobile" content="">
+	<meta name="WT.event" content="HFCZ_ZFB">
+	<meta name="WT.event" content="HFCZ_HB">
+	<meta name="WT.event" content="HFCZ_WX">
+	
+	<title>确认付款</title>
+	<link rel="stylesheet" type="text/css" href="./css/comfirm.css">
+
+</head>
+<body >
+<div id="contain">
+<form action="/baiduWapPayAction" method="post">
+	<input type="hidden" name="nextMethod" v-model="nextMethod" />
+	<input type="hidden" name="sort" :value="sort"/>
+	<input type="hidden" name="key" :value="key" />
+	<input type="hidden" name="payPhone" :value="payPhone" />
+	<input type="hidden" name="pay_bank_id" :value="paybrandId" />
+	<input type="hidden" name="commonPay" :value="commonPay" />
+	<input type="hidden" name="billMoney" />	
+	<input type="hidden" name="orderId" :value="orderId" />	
+	<input type="hidden" name="total_order_no" :value="total_order_no"/>
+	<input type="hidden" name="discountStatus" :value="discountStatus"/>
+	<input type="hidden" name="code" :value="code"/>
+	<input type="hidden" name="loginnumber" :value="loginMsisdn" />
+	<input type="hidden" name="version" :value="version"/>
+	<input type="hidden" name="scode" :value="scode"/>	
+	<input type="hidden" name="transactionid" :value="transactionid"/>
+	
+	<div class="header">
+    	<div class="title">
+        	<div class="shutdown"></div>
+            <p>充值返流量</p>
+            <div class="cardpay">
+            	<p>充值卡充值</p>
+            </div>
+        </div>
+    </div>		
+	<div class="info">
+		<div class="oneF">
+	    	<div class="blueblock"></div>
+	        <p>信息确认</p>
+	        <div class="note">
+	        	<p>交费手机号：</p>
+	            <p>{{payPhone}}</p>
+	        </div>
+	        <div class="note">
+	        	<p>到账金额：</p>
+	            <p>{{total_account_amount_int}}元</p>
+	        </div>
+	        <div class="note" v-show="point">
+	        	<p>可用{{point}} 积分抵{{pointAmout}}元</p>
+	            <div class="rule" @click="poitInfoShow=true"></div>
+	            <input class="point" type="checkbox" value="1" v-model="pointChk" />
+	        </div>
+	        <div class="note">
+	        	<p>实付金额：</p>
+	            <p id="SFinfo"><span>{{sfAmount}}</span>元</p>
+	        </div>                
+	    </div>
+	</div>
+	<div class="info">
+		<div class="twoF">
+	    	<div class="blueblock"></div>
+	        <p>支付方式</p>       
+	        <div class="pay one">
+				<div class="ZFB"></div>
+	            <div class="paystyle">
+					<p>支付宝</p>
+					<p>支付宝账号支付</p>
+	                <input id="ZFBV" name="paystyle" type="radio" value="100902;ALIPAY" class="ZFstyle one"  
+	                v-model="payMethodChk"/>
+	            </div>
+	        </div>
+	        <div class="pay">
+				<div class="YDHB" :style="pointChk==1?{background:'url(./images/YDHB-2.png) center no-repeat',backgroundSize:'cover'}:{background:'url(./images/YDHB.png) center no-repeat',backgroundSize:'cover'}">
+				</div>
+	            <div class="paystyle two">
+					<p class="YP one" :style="pointChk==1?{ color: '#999'}:{color:'#333'}">
+						中国移动和包
+					</p>
+					<p class="YP two" :style="pointChk==1?{ color: '#999'}:{color:'#666'}">
+						推荐和包用户使用
+					</p>
+	                <input name="paystyle" type="radio" value="100900;IPOS" class="ZFstyle"
+	                 v-model="payMethodChk" v-if="!pointChk"/>
+	                 <input name="paystyle" type="radio" value="100900;IPOS" class="ZFstyle"
+	                 v-model="payMethodChk" v-else disabled/>
+	            </div>
+	        </div>
+	        <div class="pay" v-show="isOpen==1">
+				<div class="WX"></div>
+	            <div class="paystyle two">
+					<p>微信</p>
+					<p>微信账号支付</p>
+	                <input id="WXV" name="paystyle" type="radio" value="100918;WEIXIN" class="ZFstyle" 
+	                v-model="payMethodChk"/>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="buynow" @click="doBuyNow" :style="buyNowOk?{background:'#0086cf'}:{background:'#c8c7cc'}">
+		<p>确认付款</p>
+	</div>
+	<div id="mask" class="mask" :style="showLoginWin||poitInfoShow?{display:'block'}:{display:'none'}"></div>            
+	<div class="mima" id="login" v-show="showLoginWin">
+		<div class="title">
+	    	<p>动态密码登录</p>
+	    </div>
+	    <div class="phonenum">
+			<input :placeholder="payPhone">
+	    </div>
+	    <div class="keynum">
+			<input placeholder="请输入短信验证码" v-model="smsCode">
+	        <div class="YZM" @click="getSmsVerifyCode" 
+	        :style="yzmInfo=='获取验证码'?{background:'#0085cf'}:{background:'#999'}">
+	        	<p :style="yzmInfo=='获取验证码'?{fontSize:'1.2rem'}:{fontSize:'1rem'}">{{yzmInfo}}</p>
+	        </div>
+	    </div>
+	    <div class="login" @click="smsPointLogin()">
+			<p>登录</p>
+	    </div>
+	    <div class="loginshutdown" @click="showLoginWin=false"></div>            
+	</div>        
+	<div class="mima two" v-show="poitInfoShow">
+		<div class="title">
+	    	<p>积分详情</p>
+	    </div>
+	    <div class="JFnote">
+	        <p>1、积分支付金额以元为单位，10元以上金额可使用积分进行支付。</p>
+	        <p>2、积分支付成功后，剩余现金部分可使用微信、支付宝支付，且使用微信、支付宝支付的金额不能低于10元。</p>
+	        <p>3、选择积分支付的客户，剩余现金部分不支持使用中国移动和包继续支付。</p>
+	        <p>4、积分支付部分，不支持退订，感谢您的理解。</p>
+	        <p>5、积分属于感谢您使用移动服务赠送的回馈，因此不再提供话费发票。</p>
+
+	    </div>
+	    <div class="loginshutdown" @click="poitInfoShow=false;"></div>            
+	</div>     
+</form>
+</div>
+</body>
+<script type="text/javascript" src="./js/vue.js"></script>
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script type="text/javascript">
+	function remChange(){
+		document.documentElement.style.fontSize=20*document.documentElement.clientWidth/750+'px';
+	}
+
+	window.onload =function(){
+		
+		remChange();
+		window.addEventListener('resize',remChange,false);
+	}
+	var errUrl = "error.html";
+	var ip = returnCitySN['cip'];
+	var vm = new Vue({
+		el:'#contain',
+		data:{
+			nextMethod:'',
+			sort:'',
+			key:'',
+			payPhone:'15810972811',
+			paybrandId:'',
+			commonPay:'',
+			orderId:'',
+			total_order_no:'',
+			discountStatus:'',
+			code:'',
+			loginMsisdn:'',
+			version:'',
+			scode:'',
+			transactionid:'',
+			point_order_no:'',
+			total_account_amount_int:0,
+			total_order_amount_int:0,
+			isOpen:1,
+			point:543,
+			poitInfoShow:false,
+			pointChk:0,
+			payMethodChk:'100902;ALIPAY',//默认选中支付宝
+			buyNowOk:true,
+			showLoginWin:false,
+			smsCode:'',//短信验证码
+			yzmInfo:'获取验证码',
+			countdown:60,
+			sfAmount:0//实付金额
+		},
+		created:function(){
+			//TODO 请求服务端初始化相关参数
+			this.total_account_amount_int=98.5;
+			this.sfAmount = this.total_account_amount_int;
+		},
+		computed:{
+			//计算积分抵扣值
+			pointAmout:function(){
+				return parseInt(this.point/85);
+			}
+		},
+		watch:{
+			pointChk:function(){
+				if (this.pointChk) {//选中了积分抵扣
+					this.payMethodChk = '100902;ALIPAY';
+					this.buyNowOk = true;
+				};
+				
+			}
+		},
+		methods:{
+			doBuyNow:function(){//点击了确认付款事件
+				if(this.buyNowOk){//确认付款按钮是否可用
+					//选中了积分抵扣并且支付方式为支付宝或者微信
+					if(this.pointChk && (this.payMethodChk=='100918;WEIXIN'
+						||this.payMethodChk=='100902;ALIPAY')){
+						this.showLoginWin = true;
+						this.smsCode = '';
+					}else{
+						this.gopay();//发起充值请求	
+					}
+				}
+			},
+			//积分抵扣获取短信验证码
+			getSmsVerifyCode:function(){
+				//请求服务端获取验证码
+				///baiduWapPayAction.do?nextMethod:'sendSMS' 
+				var param = {
+		    		nextMethod:'sendSMS',
+		    		loginnumber:this.payPhone
+		    	};
+				var json = "{'stat':'0'}";
+				var data = eval("(" + json + ")");
+				if (data.stat != 0 ) {
+					window.location = errUrl;
+				}
+				this.cutdownTime();//验证码倒计时
+			},
+			//60秒倒计时
+			cutdownTime:function(){
+				var self = this;
+				if (this.countdown == 0) { 
+					this.yzmInfo = '获取验证码';
+					this.countdown = 60; 					
+					return;				
+				} else {
+					this.yzmInfo = this.countdown + 's后重新获取';
+					this.countdown--; 
+				} 
+				setTimeout(
+					function() { 
+						self.cutdownTime();
+				},1000) 
+			},
+			//验证短信验证码校验是否成功
+			smsPointLogin:function(){
+				//请求服务端验证短信验证码校验是否成功
+				///baiduWapPayAction.do？nextMethod:'validCode',
+				var json = "{}";
+				var data = eval("(" + json + ")");
+				if (data.stat != 0 ) {
+					this.yzmInfo = '校验失败，请重新尝试';
+				} else {
+					this.showLoginWin = false;//获取登录窗口
+					this.poitInfoShow = false;//获取积分详情窗口
+					this.sfAmount = accAdd(this.total_order_amount_int,-this.pointAmout);
+									
+			        if(this.pointChk
+			        		&& this.point != 0 	   
+			        		&& this.getPointDeduction()) {
+			        	//选择积分抵扣并且扣减成功的发起充值请求
+			        	this.gopay();
+			        }					        
+				}
+			},
+			//积分扣减
+			getPointDeduction:function(){
+				var isContinue = false;
+				//请求服务端积分扣减
+				///baiduWapPayAction.do?nextMethod:'pointDeduction'
+				var param = {
+			        point:this.point,
+			     	point_amout:this.pointAmout,
+			     	msisdn: this.payPhone,
+			     	nextMethod:'pointDeduction',
+			     	totol_order_no:this.total_order_no,
+			     	order_no:this.orderId,
+			     	self_order_no:this.point_order_no
+			     };
+				var json = "{'stat':'succ','code':'1000'}";
+				var data = eval("(" + json + ")");	
+	    		if(data.stat == 'succ' 
+	    			&& data.code == '1000'){
+	    			isContinue = true;
+	    		} else {
+	    			window.location = errUrl;
+	    		}
+	    		return isContinue;		   
+			},
+			//跳转相应的支付工具页面
+			gopay:function(){
+				//if(!getResoResult) return;//判断用户是否登录
+				var paytype = this.payMethodChk;
+				this.buyNowOk = false;//按钮变灰	
+				if(paytype == '100918;WEIXIN'){				    
+					this.goWxClient();
+				}else if(paytype == '100902;ALIPAY'|| paytype == '100900;IPOS'){
+					document.forms[0].pay_bank_id.value = paytype;
+					document.forms[0].nextMethod.value = 'btnGoPay';
+					console.info("提交表单");
+					//document.forms[0].submit();
+				}else{
+					alert('请先选择支付方式！');
+				}
+				goToURL(paytype);//add by yj 插码	
+			},
+			//发起微信支付请求，跳转微信支付收银台
+			goWxClient:function(){
+				console.info("微信支付请求");
+			    var deeplink='';
+			    var order_amount = this.sfAmount*100;
+		    	//baiduWapPayAction.do'?nextMethod:'doWapWxH5Pay',
+		    	var param = {
+		    		ip:ip,
+		    		nextMethod:'doWapWxH5Pay',
+		    		order_amount:order_amount,
+		    		pay_msisdn:this.payPhone,
+		    		orderId:this.total_order_no
+		    	};
+		    	var json = "{'stat':'success','deeplink':'www.baidu.com'}";
+		    	var data = eval("(" + json + ")");
+				if (data.stat == 'success') {
+					deeplink = data.deeplink;
+					window.location.href = deeplink;						
+				} else {
+					window.location = errUrl;					
+				} 
+		    	
+			},
+			//判断用户是否登录
+			getResoResult:function(){
+				
+				var isContinue = false;
+			    var url = '/baiduWapPayAction.do';
+			    var param = {
+			     	logsrl:this.transactionid,
+			     	scode:this.scode,
+			     	nextMethod:'getResoResult'
+			     };
+			    //请求服务端判断用户是否登录
+			    //TODO 此处先写死
+			    var json = "{'stat':'fail'}";
+				var data = eval("(" + json + ")");	
+	    		if(data.stat == 'fail'){    			
+	    			setTimeout(function(){
+						varjsonObject = {"refreshurl":"http://172.29.151.166:8080/activity/topUp_recharge/recharge.html"};
+						aspireweb.ssologin(JSON.stringify(jsonObject));
+					   }, 500);
+	    		}else{
+	    			isContinue = true;
+	    		}
+			    return isContinue;
+		 	 }
+			
+		}
+	});
+
+	//精确加法
+	function accAdd(arg1, arg2) {
+     	var r1, r2, m;
+    	try {	    		
+          	r1 = arg1.toString().split(".")[1].length;
+     	} catch (e) {
+            r1 = 0;
+      	}
+     	try {
+         	r2 = arg2.toString().split(".")[1].length;
+     	} catch (e) {
+         	r2 = 0;
+   	    }
+    	m = Math.pow(10, Math.max(r1, r2));
+     	return (arg1 * m + arg2 * m) / m;
+ 	} 		
+
+		
+
+
+	
+	function goWxClient(){
+		
+	}
+
+	//插码：支付宝和和包按钮点击
+	function goToURL(paytype){
+		/*if(Webtrends) {
+			if(paytype == '100902;ALIPAY') {
+				Webtrends.multiTrack({args:{ "WT.event":"HFCZ_ZFB"},delayTime: 100});
+			} else if(paytype == '100900;IPOS') {
+				Webtrends.multiTrack({args:{ "WT.event":"HFCZ_HB"},delayTime: 100});
+			} else if(paytype == '100918;WEIXIN') {
+				Webtrends.multiTrack({args:{ "WT.event":"HFCZ_WX"},delayTime: 100});
+			}
+		}	*/
+	}		
+</script>
+
+</html>
