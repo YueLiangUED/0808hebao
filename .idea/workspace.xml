@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f23f298f-46ae-4578-926c-9b464798fcfe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/m_chongzhi.css" afterPath="$PROJECT_DIR$/css/m_chongzhi.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/prepaid_payment_homepage.html" afterPath="$PROJECT_DIR$/prepaid_payment_homepage.html" />
     </list>
     <ignored path="epay_html.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/prepaid_payment_homepage.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="189">
-              <caret line="5" column="145" selection-start-line="5" selection-start-column="145" selection-end-line="5" selection-end-column="145" />
+              <caret line="5" column="149" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="152" />
               <folding />
             </state>
           </provider>
@@ -51,8 +50,8 @@
       <file leaf-file-name="m_chongzhi.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/m_chongzhi.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
+            <state relative-caret-position="289">
+              <caret line="56" column="31" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -263,12 +262,12 @@
       <workItem from="1502183720862" duration="55000" />
       <workItem from="1502184233620" duration="109000" />
       <workItem from="1502185435198" duration="307000" />
-      <workItem from="1502186439463" duration="411000" />
+      <workItem from="1502186439463" duration="566000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5756000" />
+    <option name="totallyTimeSpent" value="5911000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1234" height="777" extended-state="0" />
@@ -428,15 +427,15 @@
     <entry file="file://$PROJECT_DIR$/prepaid_payment_homepage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
-          <caret line="5" column="145" selection-start-line="5" selection-start-column="145" selection-end-line="5" selection-end-column="145" />
+          <caret line="5" column="149" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="152" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/m_chongzhi.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
+        <state relative-caret-position="289">
+          <caret line="56" column="31" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
           <folding />
         </state>
       </provider>
