@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f23f298f-46ae-4578-926c-9b464798fcfe" name="Default" comment="" />
+    <list default="true" id="f23f298f-46ae-4578-926c-9b464798fcfe" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/m_chongzhi.css" afterPath="$PROJECT_DIR$/css/m_chongzhi.css" />
+    </list>
     <ignored path="epay_html.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,21 +25,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="prepaid_payment_homepage.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="prepaid_payment_homepage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/prepaid_payment_homepage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-494">
-              <caret line="92" column="38" selection-start-line="92" selection-start-column="38" selection-end-line="92" selection-end-column="38" />
+            <state relative-caret-position="189">
+              <caret line="5" column="145" selection-start-line="5" selection-start-column="145" selection-end-line="5" selection-end-column="145" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="m_chongzhi.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="chongzhi.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/chongzhi.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="27">
+              <caret line="58" column="21" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
+              <folding>
+                <marker date="1499847600000" expanded="true" signature="6109:6162" placeholder="..." />
+                <marker date="1499847600000" expanded="true" signature="6229:6265" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="m_chongzhi.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/m_chongzhi.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2484">
-              <caret line="92" column="14" selection-start-line="92" selection-start-column="14" selection-end-line="92" selection-end-column="14" />
+            <state relative-caret-position="208">
+              <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -49,6 +66,9 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -68,7 +88,7 @@
     <option name="width" value="1234" />
     <option name="height" value="777" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -242,12 +262,13 @@
       <workItem from="1502176956276" duration="4874000" />
       <workItem from="1502183720862" duration="55000" />
       <workItem from="1502184233620" duration="109000" />
-      <workItem from="1502185435198" duration="142000" />
+      <workItem from="1502185435198" duration="307000" />
+      <workItem from="1502186439463" duration="411000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5180000" />
+    <option name="totallyTimeSpent" value="5756000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1234" height="777" extended-state="0" />
@@ -302,6 +323,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/prepaid_payment_homepage.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/m_chongzhi.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2484">
+          <caret line="92" column="14" selection-start-line="92" selection-start-column="14" selection-end-line="92" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/icon1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/prepaid_payment_homepage.html">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3105">
           <caret line="115" column="112" selection-start-line="115" selection-start-column="112" selection-end-line="115" selection-end-column="112" />
           <folding />
@@ -340,17 +382,6 @@
     <entry file="file://$PROJECT_DIR$/images/icon1.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/chongzhi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1499847600000" expanded="true" signature="6109:6162" placeholder="..." />
-            <marker date="1499847600000" expanded="true" signature="6229:6265" placeholder="..." />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/comfirm.css">
@@ -370,14 +401,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/m_chongzhi.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2484">
-          <caret line="92" column="14" selection-start-line="92" selection-start-column="14" selection-end-line="92" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/banner_001.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -391,10 +414,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/chongzhi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="58" column="21" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
+          <folding>
+            <marker date="1499847600000" expanded="true" signature="6109:6162" placeholder="..." />
+            <marker date="1499847600000" expanded="true" signature="6229:6265" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/prepaid_payment_homepage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-494">
-          <caret line="92" column="38" selection-start-line="92" selection-start-column="38" selection-end-line="92" selection-end-column="38" />
+        <state relative-caret-position="189">
+          <caret line="5" column="145" selection-start-line="5" selection-start-column="145" selection-end-line="5" selection-end-column="145" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/m_chongzhi.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
           <folding />
         </state>
       </provider>

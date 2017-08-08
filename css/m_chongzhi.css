@@ -75,7 +75,7 @@ display: -webkit-box;-webkit-box-pack: center;-webkit-box-align: center;}
 .youhui_wrap{padding-top: 5px;width:100%;border-top:1px solid #BFB3B3;}
 .youhui_wrap h4{margin-top: 10px;margin-bottom: 6px;padding-left:6%;}
 .youhui-ul{width:94%;margin-left:6%;}
-.youhui-li{width:100%;height:25px; list-style: square inside}
+.youhui-li{width:70%;height:25px; list-style: square inside}
 .youhui-li-title{float:left;display:inline-block;line-height:25px;color:#188fd3;}
 .youhui-li-body{position:relative;margin-left:-6px;width:90%;display:inline-block;height:100%;vertical-align: middle;}
 .youhui-li-body span i{
